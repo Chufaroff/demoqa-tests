@@ -5,9 +5,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+
 
 class PracticeFormTest {
 
@@ -27,12 +29,7 @@ class PracticeFormTest {
     @Test
     void checkFormTest() {
         open("/automation-practice-form");
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        executeJavaScript("document.querySelector('.modal')?.remove();");
-        clearBrowserCookies();
-        clearBrowserLocalStorage();
-        refresh();
+
 
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("Ruby");
@@ -43,16 +40,29 @@ class PracticeFormTest {
         $(".react-datepicker__month-select").selectOption("June");
         $(".react-datepicker__year-select").selectOption("1990");
         $(".react-datepicker__day--025").click();
-        $("#subjectsInput").setValue("Programming").pressEnter();
+        $("#subjectsInput").setValue("Arts").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("Images.jfif");
-        $("#currentAddress").setValue("Street Main");
+        $("#currentAddress").setValue("Street Main").scrollTo();
         $("#state").click();
         $(byText("NCR")).click();
         $("#city").click();
         $(byText("Delhi")).click();
         $("#submit").click();
 
+        $(".modal-content").shouldBe(visible);
+        $(".table-responsive").shouldBe(visible);
+
+        $(".table-responsive").shouldHave(text("Alex Ruby"));
+        $(".table-responsive").shouldHave(text("alex@gmail.com"));
+        $(".table-responsive").shouldHave(text("Male"));
+        $(".table-responsive").shouldHave(text("1234567898"));
+        $(".table-responsive").shouldHave(text("25 June,1990"));
+        $(".table-responsive").shouldHave(text("Arts"));
+        $(".table-responsive").shouldHave(text("Sports"));
+        $(".table-responsive").shouldHave(text("Images.jfif"));
+        $(".table-responsive").shouldHave(text("Street Main"));
+        $(".table-responsive").shouldHave(text("NCR Delhi"));
 
 
     }
