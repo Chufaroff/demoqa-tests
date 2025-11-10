@@ -1,8 +1,5 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -11,20 +8,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
-class PracticeFormTest {
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = 5000;
-    }
-
-    @AfterAll
-    static void closeBrowser() {
-            closeWebDriver();
-    }
+class RegistrationTests extends TestBase {
 
     @Test
     void checkFormTest() {
@@ -35,11 +19,18 @@ class PracticeFormTest {
         $("#lastName").setValue("Ruby");
         $("#userEmail").setValue("alex@gmail.com");
         $("#genterWrapper").$(byText("Male")).click();
+        //$("[for=gender-radio-1]").click();
+        //$("#gender-radio-1").parent().click();
+
         $("#userNumber").setValue("1234567898");
+
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("June");
+        //$(".react-datepicker__month-select").selectOptionByValue("5");
         $(".react-datepicker__year-select").selectOption("1990");
+        //$(".react-datepicker__year-select").selectOptionByValue("1990");
         $(".react-datepicker__day--025").click();
+
         $("#subjectsInput").setValue("Arts").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("Images.jfif");
