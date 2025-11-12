@@ -8,12 +8,12 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
-class RegistrationTests extends TestBase {
+
+class RegistrationNotCompleteTests extends TestConfiguration {
 
     @Test
     void checkFormTest() {
         open("/automation-practice-form");
-
 
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("Ruby");
@@ -44,8 +44,7 @@ class RegistrationTests extends TestBase {
         $(".modal-content").shouldBe(visible);
         $(".table-responsive").shouldBe(visible);
 
-        $(".table-responsive").shouldHave(text("Alex Ruby"));
-        $(".table-responsive").shouldHave(text("alex@gmail.com"));
+        $(".table-responsive").shouldHave(text("Alex"), text("Ruby"), text("alex@gmail.com"));
         $(".table-responsive").shouldHave(text("Male"));
         $(".table-responsive").shouldHave(text("1234567898"));
         $(".table-responsive").shouldHave(text("25 June,1990"));

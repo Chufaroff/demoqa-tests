@@ -6,7 +6,7 @@ import pages.RegistrationPage;
 import static com.codeborne.selenide.Selenide.*;
 
 
-class RegistrationWithPageObjectsTests extends TestBase {
+class RegistrationWithPageObjectsTests extends TestConfiguration {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test

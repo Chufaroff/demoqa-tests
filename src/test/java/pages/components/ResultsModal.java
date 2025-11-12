@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class ResultsModal {
 
     public void verifyModalAppears () {
+
         $(".modal-content").shouldBe(visible);
     }
 
