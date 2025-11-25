@@ -47,7 +47,7 @@ class RegistrationNotCompleteTests extends TestConfiguration {
             $(".react-datepicker__day--025").click();
             $("#subjectsInput").setValue("Arts").pressEnter();
             $("#hobbiesWrapper").$(byText("Sports")).click();
-            $("#uploadPicture").uploadFromClasspath("Images.jfif");
+            $("#uploadPicture").uploadFromClasspath("images.jfif");
             $("#currentAddress").setValue("Street Main").scrollTo();
             $("#state").click();
             $(byText("NCR")).click();
@@ -69,13 +69,5 @@ class RegistrationNotCompleteTests extends TestConfiguration {
             $(".table-responsive").shouldHave(text("Street Main"));
             $(".table-responsive").shouldHave(text("NCR Delhi"));
         });
-
-
-
-
-
-
-
-
     }
 }
