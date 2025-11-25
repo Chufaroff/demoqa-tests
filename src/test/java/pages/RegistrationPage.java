@@ -31,9 +31,6 @@ public class RegistrationPage {
             cityInput = $("#stateCity-wrapper"),
             submitButton = $("#submit");
 
-
-
-
     public RegistrationPage openPage() {
         open("/automation-practice-form");
 

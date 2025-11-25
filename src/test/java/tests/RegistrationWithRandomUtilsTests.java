@@ -2,12 +2,14 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
+import pages.TestConfiguration;
 import utils.RegistrationRandomUtils;
 
 import static com.codeborne.selenide.Selenide.open;
 
 class RegistrationWithRandomUtilsTests extends TestConfiguration {
     RegistrationPage registrationPage = new RegistrationPage();
+
 
     @Test
     void checkFormTestWithRandomUtils() {
