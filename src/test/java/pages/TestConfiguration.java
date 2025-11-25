@@ -13,5 +13,6 @@ public class TestConfiguration {
         Configuration.timeout = 3000;
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = true;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 }
