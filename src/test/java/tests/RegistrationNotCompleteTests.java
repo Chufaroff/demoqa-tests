@@ -68,7 +68,6 @@ class RegistrationNotCompleteTests extends TestConfiguration {
             $(".table-responsive").shouldHave(text("Images.jfif"));
             $(".table-responsive").shouldHave(text("Street Main"));
             $(".table-responsive").shouldHave(text("NCR Delhi"));
-            Attachments.browserConsoleLogs();
         });
     }
 }
