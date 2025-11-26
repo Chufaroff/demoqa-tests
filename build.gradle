@@ -48,7 +48,14 @@ task demoqa_test(type: Test) {
         includeTags("demoqa")
     }
 
+    demoqa_test {
+        // Очищаем результаты перед запуском
+        doFirst {
+            delete 'build/allure-results'
+        }
+
     test {
         useJUnitPlatform()
     }
+}
 }
