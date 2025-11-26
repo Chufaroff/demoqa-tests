@@ -6,6 +6,9 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.Map;
 
 @ExtendWith({BrowserPerTestStrategyExtension.class})
 public class TestConfiguration {
@@ -26,5 +29,12 @@ public class TestConfiguration {
                 .savePageSource(true)
                 .includeSelenideSteps(true)
         );
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
 }

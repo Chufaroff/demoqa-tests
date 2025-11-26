@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.TestConfiguration;
+import pages.helpers.Attachments;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -28,6 +29,7 @@ class RegistrationNotCompleteTests extends TestConfiguration {
 
         step("Open registration form", () -> {
             open("/automation-practice-form");
+            Attachments.screenshotAs("Form opened");
         });
 
         step("Fill form and press the button Submit", () -> {
