@@ -13,7 +13,7 @@ import pages.helpers.Attachments;
 
 import java.util.Map;
 
-@ExtendWith({BrowserPerTestStrategyExtension.class})
+// @ExtendWith({BrowserPerTestStrategyExtension.class})
 public class TestConfiguration {
 
     @BeforeAll
