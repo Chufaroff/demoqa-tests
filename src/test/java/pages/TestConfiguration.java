@@ -6,7 +6,6 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.junit5.BrowserPerTestStrategyExtension;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInfo;
@@ -51,7 +50,13 @@ public class TestConfiguration {
             Attachments.screenshotAs("Screenshot after test: " + testInfo.getDisplayName());
             Attachments.pageSource();
             Attachments.browserConsoleLogs();
+
+            // Если используется Selenoid - добавляем видео
+            if (Configuration.remote != null) {
+                Attachments.addVideo();
+            }
         }
+
+        Selenide.closeWebDriver();
     }
 }
-
