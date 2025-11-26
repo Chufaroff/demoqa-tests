@@ -42,11 +42,21 @@ public class TestConfiguration {
 
     @AfterEach
     void addAttachments() {
-        if (WebDriverRunner.hasWebDriverStarted()) {
-            Attachments.screenshotAs("Last Screenshot");
-            Attachments.pageSource();
-            Attachments.browserConsoleLogs();
-            Attachments.addVideo();
+        try {
+            // Сначала создаем все вложения
+            if (WebDriverRunner.hasWebDriverStarted()) {
+                Attachments.screenshotAs("Last Screenshot");
+                Attachments.pageSource();
+                Attachments.browserConsoleLogs();
+                Attachments.addVideo();
+            }
+        } catch (Exception e) {
+            System.out.println("Non-critical error in attachments: " + e.getMessage());
+        } finally {
+            // Затем закрываем браузер в finally блоке
+            if (WebDriverRunner.hasWebDriverStarted()) {
+                WebDriverRunner.closeWebDriver();
+            }
         }
     }
 }
