@@ -42,21 +42,4 @@ public class TestConfiguration {
         ));
         Configuration.browserCapabilities = capabilities;
     }
-
-    @AfterEach
-    void afterEach(TestInfo testInfo) {
-        // Сохраняем скриншот, исходный код и логи после каждого теста
-        if (WebDriverRunner.hasWebDriverStarted()) {
-            Attachments.screenshotAs("Screenshot after test: " + testInfo.getDisplayName());
-            Attachments.pageSource();
-            Attachments.browserConsoleLogs();
-
-            // Если используется Selenoid - добавляем видео
-            if (Configuration.remote != null) {
-                Attachments.addVideo();
-            }
-        }
-
-        Selenide.closeWebDriver();
-    }
 }
