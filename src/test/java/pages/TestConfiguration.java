@@ -1,8 +1,13 @@
 package pages;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.junit5.BrowserPerTestStrategyExtension;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith({BrowserPerTestStrategyExtension.class})
 public class TestConfiguration {
 
     @BeforeAll
@@ -14,5 +19,12 @@ public class TestConfiguration {
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = false;
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
+        // Настройка Allure
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(true)
+                .includeSelenideSteps(true)
+        );
     }
 }
