@@ -69,5 +69,12 @@ class RegistrationNotCompleteTests extends TestConfiguration {
             $(".table-responsive").shouldHave(text("Street Main"));
             $(".table-responsive").shouldHave(text("NCR Delhi"));
         });
+
+        step("Create file attachments", () -> {
+            Attachments.screenshotAs("Screenshot");
+            Attachments.pageSource();
+            Attachments.browserConsoleLogs();
+            Attachments.addVideo();
+        });
     }
 }

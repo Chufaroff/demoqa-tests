@@ -8,8 +8,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.helpers.Attachments;
-
-
 import java.util.Map;
 
 // @ExtendWith({BrowserPerTestStrategyExtension.class})
@@ -38,25 +36,5 @@ public class TestConfiguration {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-    }
-
-    @AfterEach
-    void addAttachments() {
-        try {
-            // Сначала создаем все вложения
-            if (WebDriverRunner.hasWebDriverStarted()) {
-                Attachments.screenshotAs("Last Screenshot");
-                Attachments.pageSource();
-                Attachments.browserConsoleLogs();
-                Attachments.addVideo();
-            }
-        } catch (Exception e) {
-            System.out.println("Non-critical error in attachments: " + e.getMessage());
-        } finally {
-            // Затем закрываем браузер в finally блоке
-            if (WebDriverRunner.hasWebDriverStarted()) {
-                WebDriverRunner.closeWebDriver();
-            }
-        }
     }
 }
