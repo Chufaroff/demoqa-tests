@@ -1,12 +1,15 @@
 package pages;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.junit5.BrowserPerTestStrategyExtension;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.helpers.Attachments;
@@ -42,9 +45,13 @@ public class TestConfiguration {
     }
 
     @AfterEach
-    void addAttachments() {
-        Attachments.screenshotAs("Last Screenshot");
-        Attachments.pageSource();
-        Attachments.browserConsoleLogs();
+    void afterEach(TestInfo testInfo) {
+        // Сохраняем скриншот, исходный код и логи после каждого теста
+        if (WebDriverRunner.hasWebDriverStarted()) {
+            Attachments.screenshotAs("Screenshot after test: " + testInfo.getDisplayName());
+            Attachments.pageSource();
+            Attachments.browserConsoleLogs();
+        }
     }
 }
+
