@@ -23,6 +23,7 @@ class RegistrationNotCompleteTests extends TestConfiguration {
         Attachments.screenshotAs("Last Screenshot");
         Attachments.pageSource();
         Attachments.browserConsoleLogs();
+        Attachments.addVideo();
     }
 
     @Test
