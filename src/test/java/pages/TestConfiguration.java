@@ -4,9 +4,11 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.junit5.BrowserPerTestStrategyExtension;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import pages.helpers.Attachments;
 
 import java.util.Map;
 
@@ -36,5 +38,12 @@ public class TestConfiguration {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
+    }
+
+    @AfterAll
+    static void addAttachments() {
+        Attachments.screenshotAs("Last Screenshot");
+        Attachments.pageSource();
+        Attachments.browserConsoleLogs();
     }
 }
