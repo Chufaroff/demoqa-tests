@@ -4,9 +4,7 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pages.TestConfiguration;
 import pages.helpers.Attachments;
 
@@ -20,6 +18,12 @@ import static io.qameta.allure.Allure.step;
 @Severity(SeverityLevel.NORMAL)
 class RegistrationNotCompleteTests extends TestConfiguration {
 
+    @AfterEach
+    void addAttachments() {
+        Attachments.screenshotAs("Last Screenshot");
+        Attachments.pageSource();
+        Attachments.browserConsoleLogs();
+    }
 
     @Test
     @Link(name = "Testing", url = "https://demoqa.com")
