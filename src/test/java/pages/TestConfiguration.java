@@ -13,7 +13,7 @@ import pages.helpers.Attachments;
 
 import java.util.Map;
 
-// @ExtendWith({BrowserPerTestStrategyExtension.class})
+@ExtendWith({BrowserPerTestStrategyExtension.class})
 public class TestConfiguration {
 
     @BeforeAll
@@ -45,7 +45,6 @@ public class TestConfiguration {
     void addAttachments() {
         Attachments.screenshotAs("Last Screenshot");
         Attachments.pageSource();
-        Attachments.browserConsoleLogs();
         Attachments.addVideo();
     }
 }
