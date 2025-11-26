@@ -26,7 +26,6 @@ class RegistrationNotCompleteTests extends TestConfiguration {
 
         step("Open registration form", () -> {
             open("/automation-practice-form");
-            Attachments.screenshotAs("Form opened");
         });
 
         step("Fill form and press the button Submit", () -> {
@@ -53,7 +52,6 @@ class RegistrationNotCompleteTests extends TestConfiguration {
             $("#city").click();
             $(byText("Delhi")).click();
             $("#submit").click();
-            Attachments.pageSource();
         });
 
         step("Verify results registration", () -> {
