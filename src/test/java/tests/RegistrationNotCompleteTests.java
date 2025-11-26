@@ -18,14 +18,6 @@ import static io.qameta.allure.Allure.step;
 @Severity(SeverityLevel.NORMAL)
 class RegistrationNotCompleteTests extends TestConfiguration {
 
-    @AfterEach
-    void addAttachments() {
-        Attachments.screenshotAs("Last Screenshot");
-        Attachments.pageSource();
-        Attachments.browserConsoleLogs();
-        Attachments.addVideo();
-    }
-
     @Test
     @Link(name = "Testing", url = "https://demoqa.com")
     @DisplayName("Форма регистрации на сайте")
