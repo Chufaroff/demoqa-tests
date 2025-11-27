@@ -1,15 +1,19 @@
 package tests;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.TestConfiguration;
 
 import static com.codeborne.selenide.Selenide.*;
 
-
+@Tag("fillForm")
+@DisplayName("Тесты для формы регистрации https://demoqa.com/automation-practice-form")
 class RegistrationWithPageObjectsTests extends TestConfiguration {
     RegistrationPage registrationPage = new RegistrationPage();
 
+    @DisplayName("Заполнение формы регистрации с полным набором параметров")
     @Test
     void checkFormTest() {
         open("/automation-practice-form");

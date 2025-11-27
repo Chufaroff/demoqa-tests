@@ -44,13 +44,20 @@ tasks.withType(Test) {
     }
 }
 
-task demoqa_test(type: Test) {
+task demoqa_test_second(type: Test) {
     useJUnitPlatform {
-        includeTags("demoqa")
+        includeTags("fillForm")
     }
 
-    // Очищаем результаты перед запуском
-    doFirst {
-        delete 'build/allure-results'
+    task demoqa_test(type: Test) {
+        useJUnitPlatform {
+            includeTags("demoqa")
+        }
+
+
+        // Очищаем результаты перед запуском
+        doFirst {
+            delete 'build/allure-results'
+        }
     }
 }

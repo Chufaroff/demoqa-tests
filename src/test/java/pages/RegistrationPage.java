@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import pages.components.CalendarComponent;
 import pages.components.ResultsModal;
 
@@ -18,7 +19,7 @@ public class RegistrationPage {
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
-            gender = $("#genterWrapper"),
+            genderInput = $("#genterWrapper"),
             dateOfBirthInput = $("#dateOfBirthInput"),
             userNumberInput = $("#userNumber"),
             userSubjectsInput = $("#subjectsInput"),
@@ -31,42 +32,49 @@ public class RegistrationPage {
             cityInput = $("#stateCity-wrapper"),
             submitButton = $("#submit");
 
+    @Step("Открытие главной страницы регистрации")
     public RegistrationPage openPage() {
         open("/automation-practice-form");
 
         return this;
     }
 
-    public RegistrationPage setFirstName(String value) {
-        firstNameInput.setValue(value);
+    @Step("Ввод имени {firstName}")
+    public RegistrationPage setFirstName(String firstName) {
+        firstNameInput.setValue(firstName);
 
         return this;
     }
 
-    public RegistrationPage setLastName(String value) {
-        lastNameInput.setValue(value);
+    @Step("Ввод фамилии {lastName}")
+    public RegistrationPage setLastName(String lastName) {
+        lastNameInput.setValue(lastName);
 
         return this;
     }
 
-    public RegistrationPage setUserEmail(String value) {
-        userEmailInput.setValue(value);
+    @Step("Ввод почты {email}")
+    public RegistrationPage setUserEmail(String email) {
+        userEmailInput.setValue(email);
 
         return this;
     }
 
-    public RegistrationPage setGender(String value) {
-        gender.$(byText(value)).click();
+    @Step("Выбор пола {gender}")
+    public RegistrationPage setGender(String gender) {
+        genderInput.$(byText(gender)).click();
 
         return this;
     }
 
-    public RegistrationPage setNumber(String value) {
-        userNumberInput.setValue(value);
+    @Step("Ввод номера телефона {phoneNumber}")
+    public RegistrationPage setNumber(String phoneNumber) {
+        userNumberInput.setValue(phoneNumber);
 
         return this;
     }
 
+    @Step("Выбор даты рождения {day}.{month}.{year}")
     public RegistrationPage setDate(String day, String month, String year) {
         dateOfBirthInput.click();
         calendarComponent.setDate(day, month, year);
@@ -74,56 +82,65 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setSubjects(String value) {
-        userSubjectsInput.setValue(value).pressEnter();
+    @Step("Выбор предметов {subjects}")
+    public RegistrationPage setSubjects(String subjects) {
+        userSubjectsInput.setValue(subjects).pressEnter();
 
         return this;
     }
 
-    public RegistrationPage setHobbies(String value) {
-        hobbiesWrapper.$(byText(value)).click();
+    @Step("Выбор увлечений {hobby}")
+    public RegistrationPage setHobbies(String hobby) {
+        hobbiesWrapper.$(byText(hobby)).click();
 
         return this;
     }
 
-    public RegistrationPage loadPicture (String value) {
-        uploadPicture.uploadFromClasspath(value);
+    @Step("Загрузка фотографии {picture}")
+    public RegistrationPage loadPicture (String picture) {
+        uploadPicture.uploadFromClasspath(picture);
 
         return this;
     }
 
-    public RegistrationPage setCurrentAdress (String value) {
-        currentAddress.setValue(value).scrollTo();
+    @Step("Ввод текущего адреса {adress}")
+    public RegistrationPage setCurrentAdress (String adress) {
+        currentAddress.setValue(adress).scrollTo();
 
         return this;
     }
 
-    public RegistrationPage setState (String value) {
+    @Step("Выбор штата из выпадающего списка {state}")
+    public RegistrationPage setState (String state) {
         stateClick.click();
-        stateInput.$(byText(value)).click();
+        stateInput.$(byText(state)).click();
 
         return this;
     }
 
-    public RegistrationPage setCity (String value) {
+    @Step("Выбор города из выпадающего списка {city}")
+    public RegistrationPage setCity (String city) {
         cityClick.click();
-        cityInput.$(byText(value)).click();
+        cityInput.$(byText(city)).click();
 
         return this;
     }
 
+    @Step("Нажатие кнопки Submit при завершении регистрации")
     public RegistrationPage setSubmit () {
         submitButton.click();
 
         return this;
     }
 
+    @Step("Проверка появления модального окна об успешной регистрации")
     public RegistrationPage verifyRegistrationModalAppears () {
         resultsModal.verifyModalAppears ();
 
         return this;
     }
 
+    @Step("Проверка полей результирующей таблицы {key} : {value}")
     public RegistrationPage verifyResult (String key, String value) {
         resultsModal.verifyResults(key, value);
 
