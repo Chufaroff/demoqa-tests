@@ -1,24 +1,36 @@
 package pages;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.junit5.BrowserPerTestStrategyExtension;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.Map;
 
-// @ExtendWith({BrowserPerTestStrategyExtension.class})
+@ExtendWith({BrowserPerTestStrategyExtension.class})
 public class TestConfiguration {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.browser = "chrome";
-        Configuration.timeout = 3000;
+
+        // Получаем параметры из системных свойств (Jenkins передает их как -D параметры)
+        String remoteUrl = System.getProperty("remote.url", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
+        String baseUrl = System.getProperty("base.url", "https://demoqa.com");
+        String browser = System.getProperty("browser", "chrome");
+        String browserVersion = System.getProperty("browser.version", "100.0");
+        String browserSize = System.getProperty("browser.size", "1920x1080");
+
+        // Настройка Selenide
+        Configuration.baseUrl = baseUrl;
+        Configuration.browserSize = browserSize;
+        Configuration.browser = browser;
+        Configuration.browserVersion = browserVersion;
+        Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = false;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
 
         // Настройка Allure
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
@@ -27,11 +39,23 @@ public class TestConfiguration {
                 .includeSelenideSteps(true)
         );
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
+        // Удаленный браузер (если передан)
+        if (remoteUrl != null && !remoteUrl.isEmpty()) {
+            Configuration.remote = remoteUrl;
+
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                    "enableVNC", true,
+                    "enableVideo", true,
+                    "enableLog", true,
+                    "sessionTimeout", "5m"
+            ));
+
+            // Добавляем версию браузера в capabilities
+            if (browserVersion != null && !browserVersion.isEmpty()) {
+                capabilities.setCapability("browserVersion", browserVersion);
+            }
+            Configuration.browserCapabilities = capabilities;
+        }
     }
 }
