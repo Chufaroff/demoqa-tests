@@ -27,7 +27,7 @@ class RegistrationWithPageObjectsTests extends TestConfiguration {
                         .setDate("25", "June", "1990")
                         .setSubjects("Arts")
                         .setHobbies("Sports")
-                        .loadPicture("Images.jfif")
+                        .loadPicture("images.jfif")
                         .setCurrentAdress("Street Main")
                         .setState("NCR")
                         .setCity("Delhi")
