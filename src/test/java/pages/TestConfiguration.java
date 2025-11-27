@@ -19,14 +19,14 @@ public class TestConfiguration {
         String remoteUrl = System.getProperty("remote.url", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
         String baseUrl = System.getProperty("base.url", "https://demoqa.com");
         String browser = System.getProperty("browser", "chrome");
-        String browserVersion = System.getProperty("browser.version", "latest");
+        // String browserVersion = System.getProperty("browser.version", "100.0");
         String browserSize = System.getProperty("browser.size", "1920x1080");
 
         // Настройка Selenide
         Configuration.baseUrl = baseUrl;
         Configuration.browserSize = browserSize;
         Configuration.browser = browser;
-        Configuration.browserVersion = browserVersion;
+        // Configuration.browserVersion = browserVersion;
         Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = false;
@@ -51,10 +51,6 @@ public class TestConfiguration {
                     "sessionTimeout", "5m"
             ));
 
-            // Добавляем версию браузера в capabilities
-            if (browserVersion != null && !browserVersion.isEmpty()) {
-                capabilities.setCapability("browserVersion", browserVersion);
-            }
             Configuration.browserCapabilities = capabilities;
         }
     }
