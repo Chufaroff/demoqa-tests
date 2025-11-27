@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.TestConfiguration;
+import pages.helpers.Attachments;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -33,6 +34,11 @@ class RegistrationWithPageObjectsTests extends TestConfiguration {
                         .setCity("Delhi")
                         .setSubmit();
 
+        Attachments.screenshotAs("Screenshot");
+        Attachments.pageSource();
+        Attachments.browserConsoleLogs();
+        Attachments.addVideo();
+
         registrationPage.verifyRegistrationModalAppears()
                 .verifyResult("Student Name", "Alex Ruby")
                 .verifyResult("Student Email", "alex@gmail.com")
@@ -44,5 +50,7 @@ class RegistrationWithPageObjectsTests extends TestConfiguration {
                 .verifyResult("Picture", "Images.jfif")
                 .verifyResult("Address", "Street Main")
                 .verifyResult("State and City", "NCR Delhi");
+
+        Attachments.pageSource();
     }
 }
