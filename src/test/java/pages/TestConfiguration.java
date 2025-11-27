@@ -19,7 +19,7 @@ public class TestConfiguration {
         String remoteUrl = System.getProperty("remote.url", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
         String baseUrl = System.getProperty("base.url", "https://demoqa.com");
         String browser = System.getProperty("browser", "chrome");
-        String browserVersion = System.getProperty("browser.version", "100.0");
+        String browserVersion = System.getProperty("browser.version", "latest");
         String browserSize = System.getProperty("browser.size", "1920x1080");
 
         // Настройка Selenide
