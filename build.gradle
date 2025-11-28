@@ -32,6 +32,16 @@ dependencies {
     )
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty "file.encoding", "UTF-8"
+    systemProperty "sun.jnu.encoding", "UTF-8"
+}
+
 tasks.withType(Test) {
     useJUnitPlatform()
     systemProperties System.getProperties() // Передаем все системные свойства в тесты
