@@ -1,0 +1,5 @@
+8236637878:AAHQO1hUdj-whlZzhxrZhkfz7EWYWng7elM
+
+https://api.telegram.org/bot8236637878:AAHQO1hUdj-whlZzhxrZhkfz7EWYWng7elM/getUpdates
+
+java "-DconfigFile=notifications/config.json" -jar ./notifications/allure-notifications-4.11.0.jar
